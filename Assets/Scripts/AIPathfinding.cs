@@ -1,3 +1,5 @@
+
+using System.Globalization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +24,7 @@ public class AIPathfinding : MonoBehaviour
 
     void Start()
     {
-        optimumDist = Random.Range(2f, 5f);
+        optimumDist = Random.Range(3f, 5f);
         nav = GetComponent<NavMeshAgent>();
         combat = GetComponent<ShipCombat>();
     }
@@ -30,6 +32,8 @@ public class AIPathfinding : MonoBehaviour
     void GoToEnemy()
     {
         Transform goal = enemy.transform;
+
+        Debug.Log(goal.name);
 
         //Pathfind towards the closest side of the ship
 
@@ -85,7 +89,7 @@ public class AIPathfinding : MonoBehaviour
             GameObject g = c.gameObject;
 
             // Only pathfind towards other ships
-            if(!g.CompareTag("Ship"))
+            if(!g.CompareTag("Ship") || g == gameObject)
             {
                 continue;
             }
