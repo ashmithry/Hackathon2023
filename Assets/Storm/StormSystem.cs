@@ -7,6 +7,9 @@ public class StormSystem : MonoBehaviour
 {
     public Vector3 startSize, endSize;
     public float shrinkSpeed;
+
+    public static float damageTickSpeed = 1;
+    public static float stormDamage = 2.5f;
     
     private void Awake()
     {
@@ -24,18 +27,18 @@ public class StormSystem : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //stop dealing damage to any ship in zone
-        if(other.GetComponent<ShipController>() != null)
+        if(other.transform.parent.GetComponent<ShipController>() != null)
         {
-            other.GetComponent<ShipController>().isInStorm = false;
+            other.transform.parent.GetComponent<ShipController>().isInStorm = false;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
         //deal damage to any ship in zone
-        if(other.GetComponent<ShipController>() != null)
+        if(other.transform.parent.GetComponent<ShipController>() != null)
         {
-            other.GetComponent<ShipController>().isInStorm = true;
+            other.transform.parent.GetComponent<ShipController>().isInStorm = true;
         }
     }
 }

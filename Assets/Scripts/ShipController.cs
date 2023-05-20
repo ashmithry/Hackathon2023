@@ -1,3 +1,6 @@
+
+using System.Timers;
+using System.Threading;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,12 +17,19 @@ public class ShipController : MonoBehaviour
     public Rigidbody rb;
     public Transform shipTransform;
 
-    [HideInInspector]public bool isInStorm;
+
+
+    public bool isInStorm;
+    private float stormTimer;
+
+    private ShipData data;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        data = GetComponent<ShipData>();
+        stormTimer = StormSystem.damageTickSpeed;
 
     }
 
@@ -33,8 +43,15 @@ public class ShipController : MonoBehaviour
 
         if(isInStorm)
         {
-            
+            if(stormTimer <= 0)
+            {
+                data.Damage(StormSystem.stormDamage);
+                Debug.Log("storm Damage");
+                stormTimer = StormSystem.damageTickSpeed;
+            }
         }
+
+        stormTimer -= Time.deltaTime;
     }
 
     void FixedUpdate()

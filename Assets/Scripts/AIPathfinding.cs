@@ -1,5 +1,4 @@
 
-using System.Globalization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -54,20 +53,21 @@ public class AIPathfinding : MonoBehaviour
         float bestAngle = goal.rotation.eulerAngles.y - transform.rotation.eulerAngles.y;
 
         float rotationalSpeed = bestAngle / 10;
-        rotationalSpeed = Mathf.Min(rotationalSpeed, +1f);
-        rotationalSpeed = Mathf.Max(rotationalSpeed, -1f);
+        rotationalSpeed = Mathf.Min(rotationalSpeed, +7f);
+        rotationalSpeed = Mathf.Max(rotationalSpeed, -7f);
 
-        if (Mathf.Abs(bestAngle) < 2f || Mathf.Abs(bestAngle) > 178f)
+        bestAngle %= 180;
+
+        if (Mathf.Abs(bestAngle) < 10f || Mathf.Abs(bestAngle) > 170)
         {
             combat.Shoot();
-            return;
         }
 
-        if (bestAngle > 2f)
+        if (bestAngle > +1f)
         {
             transform.Rotate(0f, rotationalSpeed, 0f);
         }
-        else if (bestAngle < -2f)
+        else if (bestAngle < -1f)
         {
             transform.Rotate(0f, -rotationalSpeed, 0f);
         }
