@@ -6,7 +6,7 @@ public class Coin : MonoBehaviour
 {
     void OnTriggerEnter(Collider col)
     {
-        col.transform.parent.GetComponent<ShipData>().coins++;
+        col.transform.parent.parent.GetComponent<ShipData>().coins++;
         Destroy(gameObject);
     }
 }
