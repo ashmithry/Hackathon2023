@@ -22,6 +22,9 @@ public class AIPathfinding : MonoBehaviour
 
     private ShipCombat combat;
 
+    [SerializeField]
+    public Transform center;
+
     void Start()
     {
         optimumDist = Random.Range(3f, 5f);
@@ -33,7 +36,6 @@ public class AIPathfinding : MonoBehaviour
     {
         Transform goal = enemy.transform;
 
-        Debug.Log(goal.name);
 
         //Pathfind towards the closest side of the ship
 
@@ -49,32 +51,31 @@ public class AIPathfinding : MonoBehaviour
             nav.destination = l;
         }
 
-        //Rotate in the same direction as the ship
+        float bestAngle = goal.rotation.eulerAngles.y - transform.rotation.eulerAngles.y;
 
-        float bestAngle = transform.rotation.eulerAngles.y - goal.rotation.eulerAngles.y;
+        float rotationalSpeed = bestAngle / 10;
+        rotationalSpeed = Mathf.Min(rotationalSpeed, +1f);
+        rotationalSpeed = Mathf.Max(rotationalSpeed, -1f);
 
-        //If the angle is in Quadrant 4 or 3, then make it negative
-
-        bool neg = true;
-        if(bestAngle > 180f)
-        {
-            bestAngle -= 360f;
-        }
-
-        if(Mathf.Abs(bestAngle) < 5f || Mathf.Abs(bestAngle) > 175f)
+        if (Mathf.Abs(bestAngle) < 2f || Mathf.Abs(bestAngle) > 178f)
         {
             combat.Shoot();
             return;
         }
 
-        if((bestAngle > 5 && !neg) || (bestAngle < -175 && neg))
+        if (bestAngle > 2f)
         {
-            transform.Rotate(0f, +0.25f, 0f);
-        } 
-        else if((bestAngle < -5 && neg) || (bestAngle > 175 && !neg))
-        {
-            transform.Rotate(0f, -0.25f, 0f);
+            transform.Rotate(0f, rotationalSpeed, 0f);
         }
+        else if (bestAngle < -2f)
+        {
+            transform.Rotate(0f, -rotationalSpeed, 0f);
+        }
+    }
+
+    public void GoToCenter()
+    {
+        nav.destination = center.position;
     }
 
     void Update()
@@ -116,6 +117,9 @@ public class AIPathfinding : MonoBehaviour
         if(foundEnemy)
         {
             GoToEnemy();
+        } else
+        {
+            GoToCenter();
         }
     }
 
