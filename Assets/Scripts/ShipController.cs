@@ -6,7 +6,7 @@ using UnityEngine;
 public class ShipController : MonoBehaviour
 {
     [Header("Values")]
-    public int xInput, yInput;
+     float xInput, yInput;
     public float movementSpeed;
     public float turnSpeed;
 
@@ -32,6 +32,6 @@ public class ShipController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.AddForce(shipTransform.forward * moveSpeed * Time.fixedDeltaTime);
+        rb.AddForce(yInput * shipTransform.forward * movementSpeed * Time.fixedDeltaTime);
     }
 }

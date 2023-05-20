@@ -38,9 +38,9 @@ public class AIPathfinding : MonoBehaviour
             nav.destination = l;
         }
 
-        if (Mathf.Abs((nav.position - nav.destination).magnitude) < 3f)
+        if (Mathf.Abs((transform.position - nav.destination).magnitude) < 3f)
         {
-            canShoot = true;
+            //canShoot = true;
         }
 
         //Rotate in the same direction as the ship
@@ -63,12 +63,12 @@ public class AIPathfinding : MonoBehaviour
     void Update()
     {
 
-        RayCastHit[] data = Physics.SphereCastFile(transform.position, maxScanDistance, transform.rotation.eulerAngles, maxScanDistance);
+        RaycastHit[] data = Physics.SphereCastAll(transform.position, maxScanDistance, transform.rotation.eulerAngles, maxScanDistance);
 
         //Now check if the data is in sight line by doing a raycast
         GameObject closestEnemy = null;
-        Vector3 enemyDistance = null;
-        foreach(RayCastHit r in data)
+        Vector3 enemyDistance = Vector3.zero;
+        foreach(RaycastHit r in data)
         {
             GameObject g = r.transform.gameObject;
         }
