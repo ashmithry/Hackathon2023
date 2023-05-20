@@ -13,7 +13,7 @@ public class ShipCombat : MonoBehaviour
     [Header("Combat")]
     public float cooldown;
     private float timer;
-    public boolean player;
+    public bool player;
     void Start()
     {
         cannons = cannonParent. GetComponentsInChildren<Cannon>(); 
