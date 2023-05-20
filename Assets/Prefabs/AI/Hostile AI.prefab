@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7df5ad71ef73ad489721ac0f994b074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cannonParent: {fileID: 0}
+  cannonParent: {fileID: 960850575914088313}
   cannons:
   - {fileID: 0}
   cooldown: 1
@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb4b3955fbddf0843bf3e4f9af14a598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  center: {fileID: 5429711514803008804}
+  center: {fileID: 0}
   difficultyValue: 0
 --- !u!1 &4575837894944372579
 GameObject:
