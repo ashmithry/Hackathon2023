@@ -13,6 +13,7 @@ public class AIPathfinding : MonoBehaviour
     private bool foundEnemy;
     private GameObject enemy;
 
+    [SerializeField]
     private float maxScanDistance;
 
     void Start()
@@ -38,7 +39,7 @@ public class AIPathfinding : MonoBehaviour
             nav.destination = l;
         }
 
-        if (Mathf.Abs((transform.position - nav.destination).magnitude) < 3f)
+        if (Mathf.Abs((transform.position - nav.destination).magnitude) < 4f)
         {
             //canShoot = true;
         }
@@ -48,7 +49,7 @@ public class AIPathfinding : MonoBehaviour
         float bestAngle = goal.rotation.eulerAngles.y - transform.rotation.eulerAngles.y;
 
         float rotationalSpeed = bestAngle / 10;
-        rotationalSpeed = Mathf.Min(rotationalSpeed, 1f);
+        rotationalSpeed = Mathf.Min(rotationalSpeed, 0.25f);
 
         if (bestAngle > 2f)
         {
@@ -62,15 +63,51 @@ public class AIPathfinding : MonoBehaviour
 
     void Update()
     {
-
-        RaycastHit[] data = Physics.SphereCastAll(transform.position, maxScanDistance, transform.rotation.eulerAngles, maxScanDistance);
+        Collider[] data = Physics.OverlapSphere(transform.position, maxScanDistance);
 
         //Now check if the data is in sight line by doing a raycast
         GameObject closestEnemy = null;
-        Vector3 enemyDistance = Vector3.zero;
-        foreach(RaycastHit r in data)
+        float enemyDistance = maxScanDistance;
+        foreach(Collider c in data)
         {
-            GameObject g = r.transform.gameObject;
+            GameObject g = c.gameObject;
+
+            // Only pathfind towards other ships
+            if(!g.CompareTag("Ship"))
+            {
+                continue;
+            }
+            
+            //Try and raycast the enemy - Deprecated
+            /*
+             * RaycastHit rcData;
+            Vector3 angle = transform.rotation.eulerAngles - c.transform.rotation.eulerAngles;
+            Debug.Log(angle + "");
+
+            Debug.DrawRay(transform.position, angle);
+            if (Physics.Raycast(transform.position, angle, out rcData, maxScanDistance))
+            {
+                //Check if the enemy was hit
+                if(rcData.transform.gameObject != g)
+                {
+                    Debug.Log("Enemy Was Blocked By Something");
+                    continue;
+                }
+            }
+            else
+            {
+                Debug.Log("Ray Hit Nothing");
+                continue;
+            }
+            */
+
+            Vector3 disp = transform.position - g.transform.position;
+            float magn = Mathf.Abs(disp.magnitude);
+            if(magn < enemyDistance)
+            {
+                enemyDistance = magn;
+                closestEnemy = g;
+            }
         }
 
         if(closestEnemy != null)
@@ -85,6 +122,7 @@ public class AIPathfinding : MonoBehaviour
 
         if(foundEnemy)
         {
+            Debug.Log("Going to Enemy!");
             GoToEnemy();
         }
     }
@@ -92,6 +130,12 @@ public class AIPathfinding : MonoBehaviour
     public GameObject GetEnemy()
     {
         return enemy;
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        //Gizmos.DrawSphere(transform.position, maxScanDistance);
     }
 
 }
