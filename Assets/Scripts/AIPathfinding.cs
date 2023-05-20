@@ -13,12 +13,18 @@ public class AIPathfinding : MonoBehaviour
     private bool foundEnemy;
     private GameObject enemy;
 
+    private float optimumDist;
+
     [SerializeField]
     private float maxScanDistance;
 
+    private ShipCombat combat;
+
     void Start()
     {
+        optimumDist = Random.Range(2f, 5f);
         nav = GetComponent<NavMeshAgent>();
+        combat = GetComponent<ShipCombat>();
     }
 
     void GoToEnemy()
@@ -27,8 +33,8 @@ public class AIPathfinding : MonoBehaviour
 
         //Pathfind towards the closest side of the ship
 
-        Vector3 r = goal.position - goal.right * 2.5f;
-        Vector3 l = goal.position + goal.right * 2.5f;
+        Vector3 r = goal.position - goal.right * optimumDist;
+        Vector3 l = goal.position + goal.right * optimumDist;
 
         if (Mathf.Abs((transform.position - r).magnitude) < Mathf.Abs((transform.position - l).magnitude))
         {
@@ -39,25 +45,31 @@ public class AIPathfinding : MonoBehaviour
             nav.destination = l;
         }
 
-        if (Mathf.Abs((transform.position - nav.destination).magnitude) < 4f)
-        {
-            //canShoot = true;
-        }
-
         //Rotate in the same direction as the ship
 
-        float bestAngle = goal.rotation.eulerAngles.y - transform.rotation.eulerAngles.y;
+        float bestAngle = transform.rotation.eulerAngles.y - goal.rotation.eulerAngles.y;
 
-        float rotationalSpeed = bestAngle / 10;
-        rotationalSpeed = Mathf.Min(rotationalSpeed, 0.25f);
+        //If the angle is in Quadrant 4 or 3, then make it negative
 
-        if (bestAngle > 2f)
+        bool neg = true;
+        if(bestAngle > 180f)
         {
-            transform.Rotate(0f, rotationalSpeed, 0f);
+            bestAngle -= 360f;
         }
-        else if (bestAngle < -2f)
+
+        if(Mathf.Abs(bestAngle) < 5f || Mathf.Abs(bestAngle) > 175f)
         {
-            transform.Rotate(0f, -rotationalSpeed, 0f);
+            combat.Shoot();
+            return;
+        }
+
+        if((bestAngle > 5 && !neg) || (bestAngle < -175 && neg))
+        {
+            transform.Rotate(0f, +0.25f, 0f);
+        } 
+        else if((bestAngle < -5 && neg) || (bestAngle > 175 && !neg))
+        {
+            transform.Rotate(0f, -0.25f, 0f);
         }
     }
 
@@ -77,29 +89,6 @@ public class AIPathfinding : MonoBehaviour
             {
                 continue;
             }
-            
-            //Try and raycast the enemy - Deprecated
-            /*
-             * RaycastHit rcData;
-            Vector3 angle = transform.rotation.eulerAngles - c.transform.rotation.eulerAngles;
-            Debug.Log(angle + "");
-
-            Debug.DrawRay(transform.position, angle);
-            if (Physics.Raycast(transform.position, angle, out rcData, maxScanDistance))
-            {
-                //Check if the enemy was hit
-                if(rcData.transform.gameObject != g)
-                {
-                    Debug.Log("Enemy Was Blocked By Something");
-                    continue;
-                }
-            }
-            else
-            {
-                Debug.Log("Ray Hit Nothing");
-                continue;
-            }
-            */
 
             Vector3 disp = transform.position - g.transform.position;
             float magn = Mathf.Abs(disp.magnitude);
@@ -122,7 +111,6 @@ public class AIPathfinding : MonoBehaviour
 
         if(foundEnemy)
         {
-            Debug.Log("Going to Enemy!");
             GoToEnemy();
         }
     }
@@ -130,12 +118,6 @@ public class AIPathfinding : MonoBehaviour
     public GameObject GetEnemy()
     {
         return enemy;
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        //Gizmos.DrawSphere(transform.position, maxScanDistance);
     }
 
 }

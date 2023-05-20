@@ -27,7 +27,7 @@ public class ShipCombat : MonoBehaviour
             Shoot();
         }
 
-        timer-= Time.deltaTime;
+        timer -= Time.deltaTime;
     }
 
     public void Shoot()
@@ -40,5 +40,10 @@ public class ShipCombat : MonoBehaviour
                 }
                 timer = cooldown;
         }
+    }
+
+    public Cannon[] GetCannons()
+    {
+        return cannons;
     }
 }
