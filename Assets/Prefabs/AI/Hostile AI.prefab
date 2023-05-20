@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 4251290611840617194}
   - component: {fileID: 4251290611840617188}
   - component: {fileID: -3482846529665423788}
+  - component: {fileID: -6192353270102284599}
   m_Layer: 0
   m_Name: Hostile AI
   m_TagString: Ship
@@ -289,6 +290,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   center: {fileID: 0}
   difficultyValue: 0
+--- !u!114 &-6192353270102284599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4251290611840617197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b57a90eef51b24dafa01c5a6f2dc9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 0}
+  combat: {fileID: 0}
+  health: 50
+  upgradePoints: 0
+  coins: 0
+  coinsToUpgrade: 10
+  speed: 100
+  regen: 0.25
+  timeToRegen: 5
+  damage: 7
+  cannons: 1
+  fireRate: 1.5
 --- !u!1 &4575837894944372579
 GameObject:
   m_ObjectHideFlags: 0
