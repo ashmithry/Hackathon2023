@@ -5,41 +5,36 @@ using UnityEngine;
 using UnityEngine.AI;
 
 //Academies Hacks 2023
+//Normal AI
 
-public class AIPathfinding : MonoBehaviour
+public class NormalAI : MonoBehaviour
 {
-    private NavMeshAgent nav;
+    protected NavMeshAgent nav;
+    protected GameObject enemy;
+    protected ShipCombat combat;
+    protected AIDifficulty difficulty;
 
-    [SerializeField]
-    private bool foundEnemy;
-    private GameObject enemy;
+    protected bool foundEnemy;
 
-    private float optimumDist;
-
-    [SerializeField]
-    private float maxScanDistance;
-
-    private ShipCombat combat;
-
-    [SerializeField]
     public Transform center;
+    public int difficultyValue;
 
     void Start()
     {
-        optimumDist = Random.Range(3f, 5f);
+        difficulty = AIDifficulty.difficulties[difficultyValue];
         nav = GetComponent<NavMeshAgent>();
+        nav.acceleration = difficulty.movementVelocity;
         combat = GetComponent<ShipCombat>();
     }
 
-    void GoToEnemy()
+    protected virtual void GoToEnemy()
     {
         Transform goal = enemy.transform;
 
-
         //Pathfind towards the closest side of the ship
 
-        Vector3 r = goal.position - goal.right * optimumDist;
-        Vector3 l = goal.position + goal.right * optimumDist;
+        Vector3 r = goal.position - goal.right * difficulty.optimalDist;
+        Vector3 l = goal.position + goal.right * difficulty.optimalDist;
 
         if (Mathf.Abs((transform.position - r).magnitude) < Mathf.Abs((transform.position - l).magnitude))
         {
@@ -53,12 +48,12 @@ public class AIPathfinding : MonoBehaviour
         float bestAngle = goal.rotation.eulerAngles.y - transform.rotation.eulerAngles.y;
 
         float rotationalSpeed = bestAngle / 10;
-        rotationalSpeed = Mathf.Min(rotationalSpeed, +7f);
-        rotationalSpeed = Mathf.Max(rotationalSpeed, -7f);
+        rotationalSpeed = Mathf.Min(rotationalSpeed, +difficulty.angularVelocity);
+        rotationalSpeed = Mathf.Max(rotationalSpeed, -difficulty.angularVelocity);
 
         bestAngle %= 180;
 
-        if (Mathf.Abs(bestAngle) < 10f || Mathf.Abs(bestAngle) > 170)
+        if (Mathf.Abs(bestAngle) < difficulty.shootingAngle || Mathf.Abs(bestAngle) > (180 - difficulty.shootingAngle))
         {
             combat.Shoot();
         }
@@ -73,46 +68,52 @@ public class AIPathfinding : MonoBehaviour
         }
     }
 
-    public void GoToCenter()
+    protected void GoToCenter()
     {
         nav.destination = center.position;
     }
 
-    void Update()
+    protected void FindEnemy()
     {
-        Collider[] data = Physics.OverlapSphere(transform.position, maxScanDistance);
+        Collider[] data = Physics.OverlapSphere(transform.position, difficulty.detectionDistance);
 
         //Now check if the data is in sight line by doing a raycast
         GameObject closestEnemy = null;
-        float enemyDistance = maxScanDistance;
-        foreach(Collider c in data)
+        float enemyDistance = difficulty.detectionDistance;
+        foreach (Collider c in data)
         {
             GameObject g = c.gameObject;
 
             // Only pathfind towards other ships
-            if(!g.CompareTag("Ship") || g == gameObject)
+            if (!g.CompareTag("Ship") || g == gameObject)
             {
                 continue;
             }
 
             Vector3 disp = transform.position - g.transform.position;
             float magn = Mathf.Abs(disp.magnitude);
-            if(magn < enemyDistance)
+            if (magn < enemyDistance)
             {
                 enemyDistance = magn;
                 closestEnemy = g;
             }
         }
 
-        if(closestEnemy != null)
+        if (closestEnemy != null)
         {
             foundEnemy = true;
             enemy = closestEnemy;
-        } else
+        }
+        else
         {
             foundEnemy = false;
             enemy = null;
         }
+    }
+
+    protected virtual void Update()
+    {
+        FindEnemy();
 
         if(foundEnemy)
         {
@@ -122,10 +123,4 @@ public class AIPathfinding : MonoBehaviour
             GoToCenter();
         }
     }
-
-    public GameObject GetEnemy()
-    {
-        return enemy;
-    }
-
 }
