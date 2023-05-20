@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7df5ad71ef73ad489721ac0f994b074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cannonParent: {fileID: 0}
+  cannonParent: {fileID: 960850575914088313}
   cannons:
   - {fileID: 0}
   cooldown: 1
