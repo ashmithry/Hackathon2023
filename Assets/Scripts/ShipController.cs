@@ -14,6 +14,8 @@ public class ShipController : MonoBehaviour
     public Rigidbody rb;
     public Transform shipTransform;
 
+    [HideInInspector]public bool isInStorm;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,11 @@ public class ShipController : MonoBehaviour
         yInput = Input.GetAxisRaw("Vertical");
 
         shipTransform.Rotate(new Vector3(0f, xInput * turnSpeed * Time.deltaTime, 0f));
+
+        if(isInStorm)
+        {
+            
+        }
     }
 
     void FixedUpdate()
