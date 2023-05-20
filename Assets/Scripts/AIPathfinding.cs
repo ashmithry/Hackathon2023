@@ -11,8 +11,9 @@ public class AIPathfinding : MonoBehaviour
 
     [SerializeField]
     private bool foundEnemy;
-
     private GameObject enemy;
+
+    private float maxScanDistance;
 
     void Start()
     {
@@ -30,14 +31,14 @@ public class AIPathfinding : MonoBehaviour
 
         if (Mathf.Abs((transform.position - r).magnitude) < Mathf.Abs((transform.position - l).magnitude))
         {
-            agent.destination = r;
+            nav.destination = r;
         }
         else
         {
-            agent.destination = l;
+            nav.destination = l;
         }
 
-        if (Mathf.Abs((transform.position - agent.destination).magnitude) < 3f)
+        if (Mathf.Abs((nav.position - nav.destination).magnitude) < 3f)
         {
             canShoot = true;
         }
@@ -62,7 +63,25 @@ public class AIPathfinding : MonoBehaviour
     void Update()
     {
 
+        RayCastHit[] data = Physics.SphereCastFile(transform.position, maxScanDistance, transform.rotation.eulerAngles, maxScanDistance);
 
+        //Now check if the data is in sight line by doing a raycast
+        GameObject closestEnemy = null;
+        Vector3 enemyDistance = null;
+        foreach(RayCastHit r in data)
+        {
+            GameObject g = r.transform.gameObject;
+        }
+
+        if(closestEnemy != null)
+        {
+            foundEnemy = true;
+            enemy = closestEnemy;
+        } else
+        {
+            foundEnemy = false;
+            enemy = null;
+        }
 
         if(foundEnemy)
         {
