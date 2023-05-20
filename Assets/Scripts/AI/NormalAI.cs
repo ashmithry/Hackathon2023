@@ -30,6 +30,7 @@ public class NormalAI : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         nav.acceleration = difficulty.movementVelocity;
         combat = GetComponent<ShipCombat>();
+        center = GameObject.Find("Center").transform;
     }
 
     protected virtual void GoToEnemy()

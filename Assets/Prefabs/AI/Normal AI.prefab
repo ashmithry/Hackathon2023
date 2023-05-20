@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4251290611840617188}
   m_Layer: 0
   m_Name: Normal AI
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,9 +135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e69940df963f71743b37c79cb900f23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foundEnemy: 0
-  maxScanDistance: 10
   center: {fileID: 0}
+  difficultyValue: 0
 --- !u!114 &4251290611840617188
 MonoBehaviour:
   m_ObjectHideFlags: 0

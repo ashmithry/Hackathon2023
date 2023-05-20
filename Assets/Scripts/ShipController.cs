@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class ShipController : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class ShipController : MonoBehaviour
     [Header("References")]
     public Rigidbody rb;
     public Transform shipTransform;
-
+    CinemachineVirtualCamera vcam;
 
 
     public bool isInStorm;
@@ -30,6 +31,10 @@ public class ShipController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         data = GetComponent<ShipData>();
         stormTimer = StormSystem.damageTickSpeed;
+
+        vcam = GameObject.Find("ShipFollowCamera").GetComponent<CinemachineVirtualCamera>();
+        vcam.LookAt = transform;
+        vcam.Follow = transform;
 
     }
 
