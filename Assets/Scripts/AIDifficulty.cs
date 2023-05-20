@@ -22,7 +22,7 @@ public class AIDifficulty : MonoBehaviour
 
     public static AIDifficulty[] difficulties;
 
-    void Start()
+    public static void Init()
     {
         difficulties = new AIDifficulty[4];
 

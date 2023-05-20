@@ -21,6 +21,11 @@ public class NormalAI : MonoBehaviour
 
     void Start()
     {
+        if (AIDifficulty.difficulties == null)
+        {
+            AIDifficulty.Init();
+        }
+
         difficulty = AIDifficulty.difficulties[difficultyValue];
         nav = GetComponent<NavMeshAgent>();
         nav.acceleration = difficulty.movementVelocity;
