@@ -21,7 +21,7 @@ public class ShipController : MonoBehaviour
 
 
 
-    private ShipData data;
+    public ShipData data;
 
     // Start is called before the first frame update
     void Start()

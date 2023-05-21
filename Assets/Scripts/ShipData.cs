@@ -31,6 +31,16 @@ public class ShipData : MonoBehaviour
     public bool isInStorm;
     private float stormTimer;
 
+    public Transform healthBar;
+    public Transform healthBarBG;
+    public Vector3 barScale;
+
+    private float alpha;
+
+
+
+    [Range(0f,1f)]
+    public float shiftRate = 0.1f;
 
     void Start()
     {
@@ -53,6 +63,12 @@ public class ShipData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        alpha = Mathf.Lerp(alpha, health/50f, shiftRate);
+        alpha = Mathf.Clamp(alpha, 0f, 1f);
+        healthBar.localScale = new Vector3(barScale.x * alpha,1,1);
+
+        healthBarBG.LookAt(Camera.main.transform);
+
         if(coins >= coinsToUpgrade)
         {
             upgradePoints += 1;
@@ -81,6 +97,8 @@ public class ShipData : MonoBehaviour
             if(!combat.player)
                 Destroy(gameObject);
         }
+
+        
     }
 
     public void Dead()
