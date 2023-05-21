@@ -58,6 +58,8 @@ public class ShipData : MonoBehaviour
 
     public static string playerUsername;
 
+    public GameObject stormVolume;
+
     void Start()
     {
         playersAlive = 20;
@@ -95,6 +97,12 @@ public class ShipData : MonoBehaviour
         alpha = Mathf.Clamp(alpha, 0f, 1f);
         healthBar.localScale = new Vector3(barScale.x * alpha,1,1);
 
+        if(combat.player && isInStorm)
+        {
+            stormVolume.SetActive(true);
+        }else if(combat.player){
+            stormVolume.SetActive(false);
+        }
         healthBarBG.LookAt(Camera.main.transform);
         username.LookAt(Camera.main.transform);
 

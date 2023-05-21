@@ -60,9 +60,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   intensity:
-    m_OverrideState: 0
-    m_Value: 0.649
---- !u!114 &-4301673826398921612
+    m_OverrideState: 1
+    m_Value: 1
+--- !u!114 &-3395005990423734414
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -71,25 +71,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66f335fb1ffd8684294ad653bf1c7564, type: 3}
-  m_Name: ColorAdjustments
+  m_Script: {fileID: 11500000, guid: cdfbdbb87d3286943a057f7791b43141, type: 3}
+  m_Name: ChannelMixer
   m_EditorClassIdentifier: 
   active: 1
-  postExposure:
-    m_OverrideState: 0
-    m_Value: 0
-  contrast:
-    m_OverrideState: 0
-    m_Value: 0
-  colorFilter:
+  redOutRedIn:
     m_OverrideState: 1
-    m_Value: {r: 1.5157166, g: 0, b: 0, a: 1}
-  hueShift:
+    m_Value: 142
+  redOutGreenIn:
     m_OverrideState: 0
     m_Value: 0
-  saturation:
+  redOutBlueIn:
     m_OverrideState: 0
     m_Value: 0
+  greenOutRedIn:
+    m_OverrideState: 0
+    m_Value: 46
+  greenOutGreenIn:
+    m_OverrideState: 1
+    m_Value: 10
+  greenOutBlueIn:
+    m_OverrideState: 0
+    m_Value: 54
+  blueOutRedIn:
+    m_OverrideState: 0
+    m_Value: 53
+  blueOutGreenIn:
+    m_OverrideState: 0
+    m_Value: 0
+  blueOutBlueIn:
+    m_OverrideState: 1
+    m_Value: 10
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,7 +118,7 @@ MonoBehaviour:
   - {fileID: -6010875179242377210}
   - {fileID: 800411880956551650}
   - {fileID: -7077969555797296719}
-  - {fileID: -4301673826398921612}
+  - {fileID: -3395005990423734414}
 --- !u!114 &800411880956551650
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -122,16 +134,16 @@ MonoBehaviour:
   active: 1
   color:
     m_OverrideState: 1
-    m_Value: {r: 0.3773585, g: 0.08330365, b: 0.08330365, a: 1}
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
   center:
     m_OverrideState: 0
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.225
+    m_Value: 0.405
   smoothness:
     m_OverrideState: 1
     m_Value: 1
   rounded:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
