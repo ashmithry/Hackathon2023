@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject UI;
     public GameObject GameOverUI;
     public GameObject GameWinUI;
+    public GameObject pauseMenu;
 
     public void GameOver()
     {
@@ -26,7 +27,12 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void Update()
+    public void togglePauseMenu()
+    {
+        pauseMenu.SetActive(!pauseMenu.activeSelf);
+    }
+
+    private void Update()
     {
         GameObject player = GameObject.Find("Player");
         if (player != null && ShipData.playersAlive == 1)

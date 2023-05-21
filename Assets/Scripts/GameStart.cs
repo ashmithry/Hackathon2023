@@ -41,7 +41,7 @@ public class GameStart : MonoBehaviour
         index = 1;
         foreach (Transform sp in spawnPoints)
         {
-            if(sp == transform || Mathf.Abs(sp.position.magnitude) < 10f)
+            if(sp == transform || Mathf.Abs(sp.position.magnitude) < 10f || sp.position == playerSpawnPoint.position)
             {
                 continue;
             }
