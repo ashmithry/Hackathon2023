@@ -21,8 +21,6 @@ public class ShipController : MonoBehaviour
 
     public float startTimer = 5.0f;
 
-
-
     public ShipData data;
 
     // Start is called before the first frame update
