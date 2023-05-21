@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIDifficulty : MonoBehaviour
+public class AIDifficulty
 {
     public float movementVelocity;
     public float angularVelocity;

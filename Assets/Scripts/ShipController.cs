@@ -20,8 +20,6 @@ public class ShipController : MonoBehaviour
     CinemachineVirtualCamera vcam;
 
 
-    public bool isInStorm;
-    private float stormTimer;
 
     private ShipData data;
 
@@ -30,7 +28,7 @@ public class ShipController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         data = GetComponent<ShipData>();
-        stormTimer = StormSystem.damageTickSpeed;
+        
 
         vcam = GameObject.Find("ShipFollowCamera").GetComponent<CinemachineVirtualCamera>();
         vcam.LookAt = transform;
@@ -46,17 +44,7 @@ public class ShipController : MonoBehaviour
 
         shipTransform.Rotate(new Vector3(0f, xInput * turnSpeed * Time.deltaTime, 0f));
 
-        if(isInStorm)
-        {
-            if(stormTimer <= 0)
-            {
-                data.Damage(StormSystem.stormDamage);
-                Debug.Log("storm Damage");
-                stormTimer = StormSystem.damageTickSpeed;
-            }
-        }
-
-        stormTimer -= Time.deltaTime;
+        
     }
 
     void FixedUpdate()

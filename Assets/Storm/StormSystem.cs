@@ -27,18 +27,18 @@ public class StormSystem : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //stop dealing damage to any ship in zone
-        if(other.transform.parent.GetComponent<ShipController>() != null)
+        if(other.transform.GetComponent<ShipData>() != null)
         {
-            other.transform.parent.GetComponent<ShipController>().isInStorm = false;
+            other.transform.GetComponent<ShipData>().isInStorm = false;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
         //deal damage to any ship in zone
-        if(other.transform.parent.GetComponent<ShipController>() != null)
+        if(other.transform.GetComponent<ShipData>() != null)
         {
-            other.transform.parent.GetComponent<ShipController>().isInStorm = true;
+            other.transform.GetComponent<ShipData>().isInStorm = true;
         }
     }
 }

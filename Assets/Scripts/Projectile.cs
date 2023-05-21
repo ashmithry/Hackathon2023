@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
 {
     public float speed;
     public float duration;
+    public float damage;
     
 
     void Start()
@@ -17,6 +18,15 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.right * speed * Time.deltaTime);
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if(col.transform.GetComponent<ShipData>() != null)
+        {
+            col.transform.GetComponent<ShipData>().Damage(damage);
+            DestroySelf();
+        }
     }
 
     void DestroySelf()

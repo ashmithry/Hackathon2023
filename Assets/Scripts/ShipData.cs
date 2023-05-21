@@ -28,14 +28,23 @@ public class ShipData : MonoBehaviour
     public float fireRate = 1.5f;
 
 
+    public bool isInStorm;
+    private float stormTimer;
+
 
     void Start()
     {
-        controller = GetComponent<ShipController>();
-        controller.movementSpeed = speed;
-        controller.turnSpeed = speed;
-
         combat = GetComponent<ShipCombat>();
+        stormTimer = StormSystem.damageTickSpeed;
+
+        controller = GetComponent<ShipController>();
+        if(combat.player)
+        {
+            controller.movementSpeed = speed;
+            controller.turnSpeed = speed;
+        }
+
+        
         combat.cooldown = fireRate;
 
 
@@ -50,6 +59,17 @@ public class ShipData : MonoBehaviour
             coinsToUpgrade =  Mathf.Floor(coinsToUpgrade *= 1.1f);
             coins = 0;
         }
+
+        if(isInStorm)
+        {
+            if(stormTimer <= 0)
+            {
+                Damage(StormSystem.stormDamage);
+                stormTimer = StormSystem.damageTickSpeed;
+            }
+        }
+
+        stormTimer -= Time.deltaTime;
     }
 
     public void Damage(float dmg)
@@ -58,7 +78,8 @@ public class ShipData : MonoBehaviour
         if(health <= 0)
         {
             //player dead
-            Debug.Log("dead");
+            if(!combat.player)
+                Destroy(gameObject);
         }
     }
 

@@ -17,7 +17,8 @@ public class CoinPickuper : MonoBehaviour
     {
         for(int i = 0; i < coinsToSpawn; i++)
         {
-            Instantiate(coinPrefab, new Vector3(Random.Range(minSpawn.x, maxSpawn.x), 0.569f, Random.Range(minSpawn.z, maxSpawn.z)), coinPrefab.transform.rotation);
+            Transform t = Instantiate(coinPrefab, new Vector3(Random.Range(minSpawn.x, maxSpawn.x), 0.569f, Random.Range(minSpawn.z, maxSpawn.z)), coinPrefab.transform.rotation).transform;
+            t.parent = transform;
         }
     }
 }
