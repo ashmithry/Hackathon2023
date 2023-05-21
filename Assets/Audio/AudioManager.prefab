@@ -46,12 +46,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: cannonShoot
-    clip: {fileID: 8300000, guid: cae3518b553983248b0449a612644275, type: 3}
+    clip: {fileID: 8300000, guid: bf132f419c358bd41a097077b8fa3944, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
   - name: coinPick
-    clip: {fileID: 8300000, guid: 6e7dd7eeddad0864f89e310c70604f06, type: 3}
+    clip: {fileID: 8300000, guid: 213809db8c69a5a49a48b261c7681096, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}

@@ -13,7 +13,6 @@ public class KillFeed : MonoBehaviour
     void Start()
     {
         data = new List<GameObject>();
-        AddKill("Taha", "Pranav");
     }
 
     void Update()
