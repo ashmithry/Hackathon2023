@@ -25,7 +25,6 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        Debug.Log(col.gameObject);
         if (col.gameObject == shooter) return;
 
         if(col.transform.GetComponent<ShipData>() != null)

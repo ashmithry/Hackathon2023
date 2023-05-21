@@ -46,7 +46,6 @@ public class GameStart : MonoBehaviour
 
 
             int i = Random.Range(0, names.Count);
-            Debug.Log(names[i]);
             o.GetComponent<ShipData>().username.GetChild(0).GetComponent<TextMeshPro>().text = names[i];
             names.Remove(names[i]);
 
