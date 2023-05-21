@@ -11,7 +11,7 @@ public class ShipData : MonoBehaviour
     public ShipController controller;
     public ShipCombat combat;
 
-    public float health = 50f;
+    public float health = 75f;
     public int upgradePoints = 0;
 
     public int coins;
@@ -28,7 +28,6 @@ public class ShipData : MonoBehaviour
     public float fireRate = 1.5f;
 
     public GameObject explodeEffect;
-
 
     public bool isInStorm;
     private float stormTimer;
@@ -54,7 +53,7 @@ public class ShipData : MonoBehaviour
     private Slider progbar;
 
     public int kills;
-    public static int playersAlive = 20;
+    public static int playersAlive = 32;
 
     public static string playerUsername;
 
@@ -62,7 +61,7 @@ public class ShipData : MonoBehaviour
 
     void Start()
     {
-        playersAlive = 20;
+        playersAlive = 32;
         speedLevel = 0;
         regenLevel = 0;
         cannonLevel = 0;
@@ -82,7 +81,6 @@ public class ShipData : MonoBehaviour
             username.GetChild(0).GetComponent<TextMeshPro>().text = PlayerPrefs.GetString("username");
         }
 
-        
         combat.cooldown = fireRate;
         upgradePTSText = GameObject.Find("UpgradePTSText").GetComponent<TextMeshProUGUI>();
         progbar = GameObject.Find("LevelProgressBar").GetComponent<Slider>();
@@ -143,7 +141,6 @@ public class ShipData : MonoBehaviour
             killsText.text = "" + kills;
             playersAliveText.text = "" + playersAlive;
         }
-
     }
 
     public void Damage(float dmg)
@@ -155,8 +152,6 @@ public class ShipData : MonoBehaviour
             Dead();
             playersAlive--;
         }
-
-        
     }
 
     public void Dead()

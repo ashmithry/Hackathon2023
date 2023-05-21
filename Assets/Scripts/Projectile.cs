@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Projectile : MonoBehaviour
 {
@@ -35,7 +37,16 @@ public class Projectile : MonoBehaviour
             {
                 shooter.GetComponent<ShipData>().kills++;
                 shooter.GetComponent<ShipData>().upgradePoints++;
+
+                if (shooter == GameObject.Find("Player"))
+                {
+                    string enemy = col.gameObject.GetComponent<ShipData>().username.GetChild(0).GetComponent<TextMeshPro>().text;
+
+                    GameObject.Find("ElimStatusText").GetComponent<DestroyIn>().MakeActive();
+                    GameObject.Find("ElimStatusText").GetComponent<TextMeshProUGUI>().text = "Eliminated " + enemy;
+                }
             }
+
 
             DestroySelf();
         }

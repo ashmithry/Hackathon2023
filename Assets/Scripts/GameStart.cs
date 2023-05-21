@@ -10,7 +10,7 @@ public class GameStart : MonoBehaviour
     public Transform PlayerSpawnPoint;
     public GameObject Player;
 
-    public ShipData[] data = new ShipData[20];
+    public ShipData[] data = new ShipData[32];
     
 
     void Awake()
@@ -20,7 +20,12 @@ public class GameStart : MonoBehaviour
 
         Transform[] spawnPoints = GetComponentsInChildren<Transform>();
 
-        Transform playerSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        Transform playerSpawnPoint;
+        do
+        {
+            playerSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        } while (playerSpawnPoint == transform);
+
         int index = 0;
         GameObject p = GameObject.Find("Player");
         p.transform.position = playerSpawnPoint.position;
@@ -36,7 +41,7 @@ public class GameStart : MonoBehaviour
         index = 1;
         foreach (Transform sp in spawnPoints)
         {
-            if(sp == transform || sp == playerSpawnPoint)
+            if(sp == transform || Mathf.Abs(sp.position.magnitude) < 10f)
             {
                 continue;
             }

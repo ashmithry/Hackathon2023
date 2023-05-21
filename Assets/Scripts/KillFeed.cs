@@ -9,7 +9,7 @@ public class KillFeed : MonoBehaviour
     public List<float> timers;
 
     public GameObject killFeedEntry;
-    public float duration = 3f;
+    public float duration;
     void Start()
     {
         data = new List<GameObject>();
@@ -36,6 +36,7 @@ public class KillFeed : MonoBehaviour
         timers.Add(duration);
 
         GameObject kill = Instantiate(killFeedEntry, transform.position, transform.rotation);
+        Debug.Log(kill.transform.position);
         kill.GetComponent<TextMeshProUGUI>().text = who + " got one tapped by " + cause;
         data.Add(kill);
     }
