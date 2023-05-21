@@ -29,6 +29,6 @@ public class AudioManager : MonoBehaviour
         if (s.source.isPlaying) return;
 
         s.source.volume = volume;
-        s.source.Play();
+        s.source.PlayOneShot(s.clip, 1f);
     }
 }

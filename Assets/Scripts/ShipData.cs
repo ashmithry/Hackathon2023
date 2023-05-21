@@ -27,6 +27,8 @@ public class ShipData : MonoBehaviour
     public float damage = 7f;
     public float fireRate = 1.5f;
 
+    public GameObject explodeEffect;
+
 
     public bool isInStorm;
     private float stormTimer;
@@ -149,6 +151,7 @@ public class ShipData : MonoBehaviour
     {
         if(combat.player)
             gameManager.GameOver();
+        Instantiate(explodeEffect, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
     }
 

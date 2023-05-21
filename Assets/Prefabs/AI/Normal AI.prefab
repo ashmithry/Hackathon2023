@@ -523,6 +523,8 @@ MonoBehaviour:
   timeToRegen: 5
   damage: 7
   fireRate: 1.5
+  explodeEffect: {fileID: 8194992990867289339, guid: 99bc28c0d45f51c4fbac01080b73edc7,
+    type: 3}
   isInStorm: 0
   healthBar: {fileID: 8453716877825848800}
   healthBarBG: {fileID: 4366099062844412044}
@@ -535,6 +537,8 @@ MonoBehaviour:
   cannonLevel: 0
   damageLevel: 0
   fireRateLevel: 0
+  killsText: {fileID: 0}
+  playersAliveText: {fileID: 0}
   kills: 0
   col: {r: 0, g: 0, b: 0, a: 0}
 --- !u!136 &1115625197818658144

@@ -19,7 +19,7 @@ public class ShipController : MonoBehaviour
     public Transform shipTransform;
     CinemachineVirtualCamera vcam;
 
-    public float startTimer = 5.0f;
+    public float startTimer = 4.0f;
 
     public ShipData data;
 
@@ -28,6 +28,8 @@ public class ShipController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         data = GetComponent<ShipData>();
+        GetComponent<ShipCombat>().player = true;
+        GetComponent<ShipCombat>().player = false;
 
         vcam = GameObject.Find("ShipFollowCamera").GetComponent<CinemachineVirtualCamera>();
         vcam.LookAt = transform;
@@ -40,6 +42,8 @@ public class ShipController : MonoBehaviour
     {
         if (startTimer < 0)
         {
+            Destroy(GameObject.Find("CountdownCanvas"));
+            GetComponent<ShipCombat>().player = true;
             xInput = Input.GetAxisRaw("Horizontal");
             yInput = Input.GetAxisRaw("Vertical");
 

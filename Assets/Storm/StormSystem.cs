@@ -11,14 +11,16 @@ public class StormSystem : MonoBehaviour
     public static float damageTickSpeed = 1;
     public static float stormDamage = 2.5f;
     
+    ShipController player;
     private void Awake()
     {
         transform.localScale = new Vector3(startSize.x, 100, startSize.z);
+        player = GameObject.Find("Player").GetComponent<ShipController>();
         
     }
     private void Update()
     {
-        if(transform.localScale.z > endSize.z)
+        if(transform.localScale.z > endSize.z && player.startTimer < 0)
         {
             transform.localScale = new Vector3(transform.localScale.x - shrinkSpeed*Time.deltaTime, 100, transform.localScale.z - shrinkSpeed*Time.deltaTime);
         }

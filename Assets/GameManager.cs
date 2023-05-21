@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
         if (player != null && ShipData.playersAlive == 1)
         {
             Debug.Log("Game Won!");
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().Play("plunderRoyale");
             UI.SetActive(false);
             GameWinUI.SetActive(true);
         }

@@ -20,7 +20,7 @@ public class GameStart : MonoBehaviour
 
         Transform[] spawnPoints = GetComponentsInChildren<Transform>();
 
-        Transform playerSpawnPoint = spawnPoints[(int)Random.Range(0, spawnPoints.Length)];
+        Transform playerSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
         int index = 0;
         GameObject p = GameObject.Find("Player");
         p.transform.position = playerSpawnPoint.position;

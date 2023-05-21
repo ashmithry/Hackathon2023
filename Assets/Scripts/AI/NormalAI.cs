@@ -18,7 +18,7 @@ public class NormalAI : MonoBehaviour
 
     public Transform center;
 
-    public float startTimer = 5.0f;
+    public float startTimer = 4.0f;
 
     void Start()
     {
