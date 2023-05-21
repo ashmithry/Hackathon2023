@@ -220,6 +220,11 @@ MonoBehaviour:
   damage: 7
   cannons: 1
   fireRate: 1.5
+  isInStorm: 0
+  healthBar: {fileID: 9178354948361997754}
+  healthBarBG: {fileID: 3938059708511398102}
+  barScale: {x: 1, y: 1, z: 1}
+  shiftRate: 0.1
 --- !u!54 &3555794359943973920
 Rigidbody:
   m_ObjectHideFlags: 0
