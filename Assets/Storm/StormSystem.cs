@@ -42,7 +42,10 @@ public class StormSystem : MonoBehaviour
         if(other.transform.GetComponent<ShipData>() != null)
         {
             other.transform.GetComponent<ShipData>().isInStorm = true;
-            GameObject.Find("StormStatusText").GetComponent<TextMeshProUGUI>().enabled = true;
+            if(GameObject.Find("Player") == other.transform.gameObject)
+            {
+                GameObject.Find("StormStatusText").GetComponent<DestroyIn>().MakeActive();
+            }
         }
     }
 }
