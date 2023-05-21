@@ -35,6 +35,8 @@ public class ShipData : MonoBehaviour
     public Transform healthBarBG;
     public Vector3 barScale;
 
+    public Transform username;
+
     private float alpha;
 
     public GameManager gameManager;
@@ -87,6 +89,7 @@ public class ShipData : MonoBehaviour
         healthBar.localScale = new Vector3(barScale.x * alpha,1,1);
 
         healthBarBG.LookAt(Camera.main.transform);
+        username.LookAt(Camera.main.transform);
 
         if(coins >= coinsToUpgrade)
         {

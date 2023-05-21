@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;    
 
 public class GameStart : MonoBehaviour
 {
@@ -10,10 +11,13 @@ public class GameStart : MonoBehaviour
     public GameObject Player;
 
     public ShipData[] data = new ShipData[20];
+    
 
     void Awake()
     {
         //Spawn AI around the map
+        List<string> names = new List<string>(usernames);
+
         Transform[] spawnPoints = GetComponentsInChildren<Transform>();
 
         Transform playerSpawnPoint = spawnPoints[(int)Random.Range(0, spawnPoints.Length)];
@@ -40,7 +44,12 @@ public class GameStart : MonoBehaviour
             GameObject cur = AI[(int)Random.Range(0, AI.Length)];
             GameObject o = Instantiate(cur, sp.position, cur.transform.rotation);
 
-            data[index] = o.GetComponent<ShipData>();
+
+            int i = Random.Range(0, names.Count);
+            Debug.Log(names[i]);
+            o.GetComponent<ShipData>().username.GetChild(0).GetComponent<TextMeshPro>().text = names[i];
+            names.Remove(names[i]);
+
 
             Vector3 lookPos = Vector3.zero - o.transform.position;
             lookPos.y = 0;
@@ -48,4 +57,124 @@ public class GameStart : MonoBehaviour
             index++;
         }
     }
+
+    string[] usernames = {
+    // Pirate-related usernames (25)
+    "CaptainHook123",
+    "Blackbeard89",
+    "ScurvyDog456",
+    "JollyRoger777",
+    "SeaWolf12",
+    "CannonballKate",
+    "DavyJones555",
+    "BuccaneerX",
+    "TreasureHunter22",
+    "PegLegPete",
+    "Rumlover123",
+    "ShiverMeTimbers",
+    "SaltySailor789",
+    "GoldToothedJack",
+    "SwordMaster99",
+    "MaroonedMark",
+    "SquidBeard12",
+    "KrakenSlayer123",
+    "CorsairQueen",
+    "BootyHunter42",
+    "AdmiralAnnie",
+    "SwashbucklerX",
+    "PlunderPirate",
+    "CrowsNest24",
+    "RustyCutlass",
+    "SailAway777",
+
+    // Xbox Gamertag-style usernames (75)
+    "ShadowNinja123",
+    "DragonSlayerX",
+    "SniperWolf89",
+    "RapidFire666",
+    "StarGazer23",
+    "LoneWolf32",
+    "TheIronFist",
+    "MidnightRiderX",
+    "CyberPunk007",
+    "EpicGamerX",
+    "JediMaster99",
+    "NeonSpectre123",
+    "FirestormX",
+    "ThunderBolt42",
+    "MysticBladeX",
+    "DarkKnight777",
+    "StormChaserX",
+    "PsychoKiller23",
+    "BlazeFire89",
+    "NightmareX",
+    "SpeedDemon123",
+    "SteelHeartedX",
+    "BioHazard42",
+    "DoomBringerX",
+    "PhantomStriker",
+    "NovaStrike777",
+    "DeathWishX",
+    "SavageHunter23",
+    "IronLion32",
+    "PixelWarriorX",
+    "ShadowHunter007",
+    "EagleEyeX",
+    "VenomousViper123",
+    "GhostRiderX",
+    "MegaBlast42",
+    "XtremeGamerX",
+    "BladeMaster99",
+    "CrimsonFang123",
+    "SpartanWarriorX",
+    "WickedWitch89",
+    "RavenDarkness666",
+    "StealthyNinja23",
+    "SilverBullet32",
+    "RampageX",
+    "CyborgX",
+    "SonicBoom007",
+    "BlitzkriegX",
+    "Stormbringer123",
+    "LaserSlingerX",
+    "NebulaSorcerer",
+    "GrimReaper777",
+    "RecklessRider23",
+    "ViperFang89",
+    "ShatteredDreamX",
+    "PhantomBlade123",
+    "DreadnoughtX",
+    "ShadowWraith42",
+    "SoulStealerX",
+    "VenomStrike777",
+    "BloodLustX",
+    "NightStalker23",
+    "IronFist32",
+    "MadHatterX",
+    "CyberShadow007",
+    "EternalPhoenixX",
+    "Frostbite123",
+    "DeathBringerX",
+    "SilentAssassin42",
+    "VortexX",
+    "NovaBlitz777",
+    "ToxicShockX",
+    "Warlord99",
+    "Nightshade123",
+    "VoidWalkerX",
+    "LoneRanger89",
+    "Hellfire666",
+    "ShadowLurker23",
+    "DeathMachineX",
+    "Ragnarok007",
+    "RapidStrikeX",
+    "StormSorcerer123",
+    "DoomSlayerX",
+    "BlackWidow42",
+    "NemesisX",
+    "PhantomWolf777",
+    "SavageAngel23",
+    "IronLioness32",
+    "MysticDragonX"
+    };
 }
