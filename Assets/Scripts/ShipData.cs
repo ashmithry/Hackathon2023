@@ -38,6 +38,8 @@ public class ShipData : MonoBehaviour
 
     private float alpha;
 
+    public GameManager gameManager;
+
 
     [Range(0f,1f)]
     public float shiftRate = 0.1f;
@@ -57,7 +59,7 @@ public class ShipData : MonoBehaviour
 
         combat = GetComponent<ShipCombat>();
         stormTimer = StormSystem.damageTickSpeed;
-
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         controller = GetComponent<ShipController>();
         if(combat.player)
         {
@@ -119,8 +121,7 @@ public class ShipData : MonoBehaviour
         if(health <= 0)
         {
             //player dead
-            if(!combat.player)
-                Destroy(gameObject);
+            Dead();
 
             regenTimer = timeToRegen;
         }
@@ -130,8 +131,9 @@ public class ShipData : MonoBehaviour
 
     public void Dead()
     {
-        //delete player
-        Destroy(gameObject);
+        if(combat.player)
+            gameManager.GameOver();
+        gameObject.SetActive(false);
     }
 
     public Color col;

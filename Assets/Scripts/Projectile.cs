@@ -19,16 +19,12 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.right * speed * Time.deltaTime + Vector3.down * Time.deltaTime);
-
-        if(transform.position.y < 0)
-        {
-            DestroySelf();
-        }
+        transform.Translate(Vector3.right * speed * Time.deltaTime);
     }
 
-    void OnCollisionEnter(Collision col)
+    void OnTriggerEnter(Collider col)
     {
+        Debug.Log(col.gameObject);
         if (col.gameObject == shooter) return;
 
         if(col.transform.GetComponent<ShipData>() != null)
