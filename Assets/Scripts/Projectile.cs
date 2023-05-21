@@ -36,8 +36,6 @@ public class Projectile : MonoBehaviour
             col.transform.GetComponent<ShipData>().Damage(damage);
             DestroySelf();
         }
-
-
     }
 
     void DestroySelf()

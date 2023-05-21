@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ShipData : MonoBehaviour
 {
@@ -18,13 +20,12 @@ public class ShipData : MonoBehaviour
 
     public float speed = 100f;
 
-    public float regen = 0.25f;
-    public float timeToRegen = 5f;
+    public float regen = 1f;
+    public float timeToRegen = 3.5f;
     private float regenTimer;
     
 
     public float damage = 7f;
-    public int cannons = 1;
     public float fireRate = 1.5f;
 
 
@@ -41,6 +42,9 @@ public class ShipData : MonoBehaviour
     [Range(0f,1f)]
     public float shiftRate = 0.1f;
     public int speedLevel, regenLevel, cannonLevel, damageLevel, fireRateLevel;
+
+    private TextMeshProUGUI tmp;
+    private Slider progbar;
 
     void Start()
     {
@@ -63,8 +67,10 @@ public class ShipData : MonoBehaviour
 
         
         combat.cooldown = fireRate;
+        tmp = GameObject.Find("UpgradePTSText").GetComponent<TextMeshProUGUI>();
+        progbar = GameObject.Find("LevelProgressBar").GetComponent<Slider>();
 
-
+        regenTimer = timeToRegen;
     }
 
     // Update is called once per frame
@@ -93,6 +99,18 @@ public class ShipData : MonoBehaviour
         }
 
         stormTimer -= Time.deltaTime;
+
+        //Update Upgrade Points text
+
+        tmp.text = "" + upgradePoints;
+        progbar.value = coins / coinsToUpgrade;
+
+        regenTimer -= Time.deltaTime;
+        if(regenTimer <= 0)
+        {
+            health += regen;
+            regenTimer = timeToRegen;
+        }
     }
 
     public void Damage(float dmg)
@@ -103,6 +121,8 @@ public class ShipData : MonoBehaviour
             //player dead
             if(!combat.player)
                 Destroy(gameObject);
+
+            regenTimer = timeToRegen;
         }
 
         
@@ -114,20 +134,28 @@ public class ShipData : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public Color col;
+
+    void UpdateUI(GameObject ui, int index)
+    {
+        Debug.Log(ui.transform.GetChild(1).GetChild(index));
+        ui.transform.GetChild(1).GetChild(index).GetComponent<Image>().color = col;
+    }
+
     public void Upgrade(string stat)
     {
-        Debug.Log("Updating!");
-
         if (upgradePoints > 0)
         {
-            switch(stat)
+            switch (stat)
             {
                 case "cannons":
 
                     if (cannonLevel >= 3) return;
-
-                    cannons += 1;
                     cannonLevel++;
+
+                    UpdateUI(GameObject.Find("CannonUpgrade"), cannonLevel - 1);
+                    transform.GetComponentsInChildren<Cannon>()[cannonLevel*2].enabled = true;
+                    transform.GetComponentsInChildren<Cannon>()[cannonLevel*2+1].enabled = true;
                     break;
                 case "damage":
 
@@ -135,6 +163,7 @@ public class ShipData : MonoBehaviour
 
                     damage += 1.5f;
                     damageLevel++;
+                    UpdateUI(GameObject.Find("DamageUpgrade"), damageLevel - 1);
                     break;
                 case "fire rate":
 
@@ -143,28 +172,30 @@ public class ShipData : MonoBehaviour
                     fireRate -= 0.25f;
                     combat.cooldown = fireRate;
                     fireRateLevel++;
+                    UpdateUI(GameObject.Find("FireRateUpgrade"), fireRateLevel - 1);
                     break;
                 case "regen":
 
                     if (regenLevel >= 3) return;
 
-                    regen += 0.25f;
+                    regen += 2f;
                     regenLevel++;
+                    UpdateUI(GameObject.Find("RegenUpgrade"), regenLevel - 1);
                     break;
                 case "speed":
 
                     if (speedLevel >= 3) return;
 
+                    Debug.Log("Updating Speed!");
+
                     speed += 10;
                     controller.movementSpeed = speed;
                     controller.turnSpeed = speed;
                     speedLevel++;
-                    break;
-                default:
+                    UpdateUI(GameObject.Find("SpeedUpgrade"), speedLevel - 1);
                     break;
 
             }
-
             upgradePoints -= 1;
         }
     }

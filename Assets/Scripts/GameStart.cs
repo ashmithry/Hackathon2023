@@ -39,7 +39,5 @@ public class GameStart : MonoBehaviour
             o.transform.rotation = Quaternion.LookRotation(lookPos);
 
         }
-
-
     }
 }

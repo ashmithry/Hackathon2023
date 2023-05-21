@@ -16,8 +16,12 @@ public class ShipCombat : MonoBehaviour
     public bool player;
     void Start()
     {
-        cannons = cannonParent. GetComponentsInChildren<Cannon>(); 
-         
+        UpdateCannons();
+    }
+
+    public void UpdateCannons()
+    {
+        cannons = cannonParent.GetComponentsInChildren<Cannon>();
     }
 
     void Update()
