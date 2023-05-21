@@ -40,6 +40,7 @@ public class ShipData : MonoBehaviour
     public Transform username;
 
     private float alpha;
+    private float palpha;
 
     public GameManager gameManager;
 
@@ -66,6 +67,7 @@ public class ShipData : MonoBehaviour
         damageLevel = 0;
         fireRateLevel = 0;
         kills = 0;
+        palpha = 0;
 
         combat = GetComponent<ShipCombat>();
         stormTimer = StormSystem.damageTickSpeed;
@@ -117,7 +119,9 @@ public class ShipData : MonoBehaviour
         //Update Upgrade Points text
 
         upgradePTSText.text = "" + upgradePoints;
-        progbar.value = coins / coinsToUpgrade;
+
+        palpha = Mathf.Lerp(palpha, coins / coinsToUpgrade, 0.1f);
+        progbar.value = palpha;
 
         regenTimer -= Time.deltaTime;
         if(regenTimer <= 0)
