@@ -25,4 +25,15 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    public void Update()
+    {
+        GameObject player = GameObject.Find("Player");
+        if (player != null && ShipData.playersAlive == 1)
+        {
+            Debug.Log("Game Won!");
+            UI.SetActive(false);
+            GameWonUI.SetActive(true);
+        }
+    }
 }
