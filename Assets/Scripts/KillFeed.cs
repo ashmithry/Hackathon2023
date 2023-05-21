@@ -37,5 +37,6 @@ public class KillFeed : MonoBehaviour
 
         GameObject kill = Instantiate(killFeedEntry, transform.position, transform.rotation);
         kill.GetComponent<TextMeshProUGUI>().text = who + " got one tapped by " + cause;
+        data.Add(kill);
     }
 }

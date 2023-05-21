@@ -45,13 +45,15 @@ public class ShipData : MonoBehaviour
     public float shiftRate = 0.1f;
     public int speedLevel, regenLevel, cannonLevel, damageLevel, fireRateLevel;
 
-    private TextMeshProUGUI tmp;
+    private TextMeshProUGUI upgradePTSText;
     public TextMeshProUGUI killsText;
     public TextMeshProUGUI playersAliveText;
     private Slider progbar;
 
     public int kills;
     public static int playersAlive = 20;
+
+    public static string playerUsername;
 
     void Start()
     {
@@ -71,11 +73,12 @@ public class ShipData : MonoBehaviour
         {
             controller.movementSpeed = speed;
             controller.turnSpeed = speed;
+            username.GetChild(0).GetComponent<TextMeshPro>().text = PlayerPrefs.GetString("username");
         }
 
         
         combat.cooldown = fireRate;
-        tmp = GameObject.Find("UpgradePTSText").GetComponent<TextMeshProUGUI>();
+        upgradePTSText = GameObject.Find("UpgradePTSText").GetComponent<TextMeshProUGUI>();
         progbar = GameObject.Find("LevelProgressBar").GetComponent<Slider>();
 
         regenTimer = timeToRegen;
@@ -111,7 +114,7 @@ public class ShipData : MonoBehaviour
 
         //Update Upgrade Points text
 
-        tmp.text = "" + upgradePoints;
+        upgradePTSText.text = "" + upgradePoints;
         progbar.value = coins / coinsToUpgrade;
 
         regenTimer -= Time.deltaTime;
