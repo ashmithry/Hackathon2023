@@ -17,6 +17,9 @@ public class GameStart : MonoBehaviour
         Transform playerSpawnPoint = spawnPoints[(int)Random.Range(0, spawnPoints.Length)];
 
         GameObject p = Instantiate(Player, playerSpawnPoint.position, playerSpawnPoint.rotation);
+        GameObject minimapCam = GameObject.Find("MinimapCam");
+        minimapCam.transform.parent = p.transform;
+        minimapCam.transform.position = new Vector3(0,85,0);
         Vector3 playerLookPos = Vector3.zero - p.transform.position;
         playerLookPos.y = 0;
         p.transform.rotation = Quaternion.LookRotation(playerLookPos);
