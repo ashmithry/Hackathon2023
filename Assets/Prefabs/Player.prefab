@@ -146,7 +146,6 @@ MonoBehaviour:
   turnSpeed: 75
   rb: {fileID: 3555794359943973920}
   shipTransform: {fileID: 3555794360254573999}
-  isInStorm: 0
 --- !u!114 &3555794359943973918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +186,7 @@ MonoBehaviour:
   damage: 7
   cannons: 1
   fireRate: 1.5
+  isInStorm: 0
 --- !u!54 &3555794359943973920
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -818,7 +818,7 @@ PrefabInstance:
     - target: {fileID: 3386870002344372442, guid: 802908a95290e70478424832a56757f3,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3386870002344372442, guid: 802908a95290e70478424832a56757f3,
         type: 3}
@@ -828,7 +828,7 @@ PrefabInstance:
     - target: {fileID: 3386870002344372442, guid: 802908a95290e70478424832a56757f3,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3386870002344372442, guid: 802908a95290e70478424832a56757f3,
         type: 3}
@@ -843,7 +843,7 @@ PrefabInstance:
     - target: {fileID: 3386870002344372442, guid: 802908a95290e70478424832a56757f3,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 3386870002344372442, guid: 802908a95290e70478424832a56757f3,
         type: 3}

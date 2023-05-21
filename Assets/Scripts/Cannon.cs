@@ -10,7 +10,7 @@ public class Cannon : MonoBehaviour
 
     public void Shoot()
     {
-        Instantiate(projectile, shootPoint.position, shootPoint.rotation);
+        Instantiate(projectile, shootPoint.position, shootPoint.rotation, transform);
     }
 
     public Transform GetShootPoint()

@@ -121,6 +121,12 @@ public class NormalAI : MonoBehaviour
     {
         FindEnemy();
 
+        if(GetComponent<ShipData>().isInStorm)
+        {
+            GoToCenter();
+            return;
+        }
+
         if(foundEnemy)
         {
             GoToEnemy();
