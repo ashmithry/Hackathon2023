@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameStart : MonoBehaviour
 {
     public GameObject[] AI;
-
     public Transform PlayerSpawnPoint;
     public GameObject Player;
 
@@ -16,13 +15,14 @@ public class GameStart : MonoBehaviour
 
         Transform playerSpawnPoint = spawnPoints[(int)Random.Range(0, spawnPoints.Length)];
 
-        GameObject p = Instantiate(Player, playerSpawnPoint.position, playerSpawnPoint.rotation);
         GameObject minimapCam = GameObject.Find("MinimapCam");
-        minimapCam.transform.parent = p.transform;
-        minimapCam.transform.position = new Vector3(0,85,0);
-        Vector3 playerLookPos = Vector3.zero - p.transform.position;
+
+        Player.transform.position = playerSpawnPoint.position;
+        minimapCam.transform.parent = Player.transform;
+        minimapCam.transform.position = new Vector3(0, 85, 0);
+        Vector3 playerLookPos = Vector3.zero - Player.transform.position;
         playerLookPos.y = 0;
-        p.transform.rotation = Quaternion.LookRotation(playerLookPos);
+        Player.transform.rotation = Quaternion.LookRotation(playerLookPos);
 
         foreach (Transform sp in spawnPoints)
         {

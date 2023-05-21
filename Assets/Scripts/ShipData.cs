@@ -38,12 +38,19 @@ public class ShipData : MonoBehaviour
     private float alpha;
 
 
-
     [Range(0f,1f)]
     public float shiftRate = 0.1f;
+    public int speedLevel, regenLevel, cannonLevel, damageLevel, fireRateLevel;
 
     void Start()
     {
+
+        speedLevel = 0;
+        regenLevel = 0;
+        cannonLevel = 0;
+        damageLevel = 0;
+        fireRateLevel = 0;
+
         combat = GetComponent<ShipCombat>();
         stormTimer = StormSystem.damageTickSpeed;
 
@@ -109,27 +116,49 @@ public class ShipData : MonoBehaviour
 
     public void Upgrade(string stat)
     {
-        if(upgradePoints > 0)
+        Debug.Log("Updating!");
+
+        if (upgradePoints > 0)
         {
             switch(stat)
             {
                 case "cannons":
+
+                    if (cannonLevel >= 3) return;
+
                     cannons += 1;
+                    cannonLevel++;
                     break;
                 case "damage":
+
+                    if (damageLevel >= 3) return;
+
                     damage += 1.5f;
+                    damageLevel++;
                     break;
                 case "fire rate":
+
+                    if (fireRateLevel >= 3) return;
+
                     fireRate -= 0.25f;
                     combat.cooldown = fireRate;
+                    fireRateLevel++;
                     break;
                 case "regen":
+
+                    if (regenLevel >= 3) return;
+
                     regen += 0.25f;
+                    regenLevel++;
                     break;
                 case "speed":
+
+                    if (speedLevel >= 3) return;
+
                     speed += 10;
                     controller.movementSpeed = speed;
                     controller.turnSpeed = speed;
+                    speedLevel++;
                     break;
                 default:
                     break;

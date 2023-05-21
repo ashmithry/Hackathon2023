@@ -17,16 +17,15 @@ public class NormalAI : MonoBehaviour
     protected bool foundEnemy;
 
     public Transform center;
-    public int difficultyValue;
 
     void Start()
     {
         if (AIDifficulty.difficulties == null)
         {
-            AIDifficulty.Init();
+            AIDifficulty.Init(); 
         }
 
-        difficulty = AIDifficulty.difficulties[difficultyValue];
+        difficulty = AIDifficulty.difficulties[(int)Random.Range(0, 4)];
         nav = GetComponent<NavMeshAgent>();
         nav.acceleration = difficulty.movementVelocity;
         combat = GetComponent<ShipCombat>();

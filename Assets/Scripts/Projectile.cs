@@ -13,7 +13,8 @@ public class Projectile : MonoBehaviour
 
     void Start()
     {
-        shooter = transform.parent.gameObject;
+        shooter = transform.parent.parent.parent.parent.parent.gameObject;
+        damage = shooter.GetComponent<ShipData>().damage;
     }
 
     void Update()
