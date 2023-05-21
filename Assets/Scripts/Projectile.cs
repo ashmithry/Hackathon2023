@@ -13,6 +13,7 @@ public class Projectile : MonoBehaviour
 
     void Start()
     {
+        Invoke("DestroySelf", duration);
         shooter = transform.parent.parent.parent.parent.parent.gameObject;
         damage = shooter.GetComponent<ShipData>().damage;
     }

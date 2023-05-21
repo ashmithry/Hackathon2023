@@ -19,6 +19,7 @@ public class GameStart : MonoBehaviour
         Transform playerSpawnPoint = spawnPoints[(int)Random.Range(0, spawnPoints.Length)];
         int index = 0;
         GameObject p = GameObject.Find("Player");
+        p.transform.position = playerSpawnPoint.position;
         GameObject minimapCam = GameObject.Find("MinimapCam");
         data[index] = p.GetComponent<ShipData>();
         minimapCam.transform.parent = p.transform;
