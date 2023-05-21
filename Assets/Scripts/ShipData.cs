@@ -48,6 +48,8 @@ public class ShipData : MonoBehaviour
     private TextMeshProUGUI tmp;
     private Slider progbar;
 
+    public int kills;
+
     void Start()
     {
 
@@ -56,6 +58,7 @@ public class ShipData : MonoBehaviour
         cannonLevel = 0;
         damageLevel = 0;
         fireRateLevel = 0;
+        kills = 0;
 
         combat = GetComponent<ShipCombat>();
         stormTimer = StormSystem.damageTickSpeed;
