@@ -196,8 +196,12 @@ public class ShipData : MonoBehaviour
                     speedLevel++;
                     UpdateUI(GameObject.Find("SpeedUpgrade"), speedLevel - 1);
                     break;
+                default:
+                    return;
 
             }
+
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().Play("upgradeSound");
             upgradePoints -= 1;
         }
     }

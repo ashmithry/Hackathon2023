@@ -10,5 +10,9 @@ public class Coin : MonoBehaviour
 
         col.transform.GetComponent<ShipData>().coins++;
         Destroy(gameObject);
+
+        if(col.transform.GetComponent<ShipCombat>().player)
+
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().Play("coinPick");
     }
 }

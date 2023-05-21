@@ -14,6 +14,8 @@ public class ShipCombat : MonoBehaviour
     public float cooldown;
     private float timer;
     public bool player;
+
+    public float startTimer = 5.0f;
     void Start()
     {
         UpdateCannons();
@@ -32,6 +34,13 @@ public class ShipCombat : MonoBehaviour
         }
 
         timer -= Time.deltaTime;
+        startTimer -= Time.deltaTime;
+
+        if(startTimer < 0) 
+        {
+            cannons[0].enabled = true;
+            cannons[1].enabled = true;
+        }
     }
 
     public void Shoot()
@@ -40,7 +49,7 @@ public class ShipCombat : MonoBehaviour
         {
             foreach(Cannon c in cannons)
                 {
-                    c.Shoot();
+                    c.Shoot(player);
                 }
                 timer = cooldown;
         }

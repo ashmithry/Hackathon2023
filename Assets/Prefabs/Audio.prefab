@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8452432291503315902}
   - component: {fileID: 1615200563081301553}
+  - component: {fileID: 7686889167043573135}
   m_Layer: 0
   m_Name: Audio
   m_TagString: Untagged
@@ -44,4 +45,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86fdf0ce99ee4114a941f8d53713f169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: backgroundMusic
+    clip: {fileID: 8300000, guid: 9f62ae3e72c42584381d3d24b90f7aee, type: 3}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+--- !u!114 &7686889167043573135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6249071131237951353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067fdb1e3ff94f84d8699db753c4e3a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

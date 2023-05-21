@@ -19,6 +19,8 @@ public class ShipController : MonoBehaviour
     public Transform shipTransform;
     CinemachineVirtualCamera vcam;
 
+    public float startTimer = 5.0f;
+
 
 
     public ShipData data;
@@ -28,7 +30,6 @@ public class ShipController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         data = GetComponent<ShipData>();
-        
 
         vcam = GameObject.Find("ShipFollowCamera").GetComponent<CinemachineVirtualCamera>();
         vcam.LookAt = transform;
@@ -39,11 +40,23 @@ public class ShipController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        xInput = Input.GetAxisRaw("Horizontal");
-        yInput = Input.GetAxisRaw("Vertical");
+        if (startTimer < 0)
+        {
+            xInput = Input.GetAxisRaw("Horizontal");
+            yInput = Input.GetAxisRaw("Vertical");
 
-        shipTransform.Rotate(new Vector3(0f, xInput * turnSpeed * Time.deltaTime, 0f));
+            shipTransform.Rotate(new Vector3(0f, xInput * turnSpeed * Time.deltaTime, 0f));
 
+            if(xInput > 0f || yInput > 0f) 
+            {
+                Vector2 Input = new Vector2(xInput, yInput);
+                Input.Normalize();
+                GameObject.Find("AudioManager").GetComponent<AudioManager>().Play("movementSound", Mathf.Abs(Input.magnitude));
+            }
+        } else
+        {
+            startTimer -= Time.deltaTime;
+        }
         
     }
 

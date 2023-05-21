@@ -18,6 +18,8 @@ public class NormalAI : MonoBehaviour
 
     public Transform center;
 
+    public float startTimer = 5.0f;
+
     void Start()
     {
         if (AIDifficulty.difficulties == null)
@@ -118,6 +120,12 @@ public class NormalAI : MonoBehaviour
 
     protected virtual void Update()
     {
+        if(startTimer > 0)
+        {
+            startTimer -= Time.deltaTime;
+            return;
+        }
+
         FindEnemy();
 
         if(GetComponent<ShipData>().isInStorm)
