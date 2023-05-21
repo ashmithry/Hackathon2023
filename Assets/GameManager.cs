@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Game Won!");
             UI.SetActive(false);
-            GameWonUI.SetActive(true);
+            GameWinUI.SetActive(true);
         }
     }
 }
