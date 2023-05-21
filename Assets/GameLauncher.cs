@@ -8,6 +8,8 @@ using TMPro;
 public class GameLauncher : MonoBehaviour
 {
     public Text usernameInput;
+    public GameObject menuTutorial;
+
     public void OnStartClick()
     {
         PlayerPrefs.SetString("username", usernameInput.text);
@@ -25,5 +27,10 @@ public class GameLauncher : MonoBehaviour
         }
 
         usernameInput.text = username;
+    }
+
+    public void ToggleTutorial()
+    {
+        menuTutorial.SetActive(!menuTutorial.activeSelf);
     }
 }
