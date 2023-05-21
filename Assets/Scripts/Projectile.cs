@@ -35,7 +35,6 @@ public class Projectile : MonoBehaviour
             if(col.transform.GetComponent<ShipData>().health <= 0)
             {
                 shooter.GetComponent<ShipData>().kills++;
-                Debug.Log("Kills: " + shooter.GetComponent<ShipData>().kills);
             }
 
             DestroySelf();

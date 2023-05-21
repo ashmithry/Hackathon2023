@@ -17,7 +17,6 @@ public class ShipData : MonoBehaviour
     public int coins;
     public float coinsToUpgrade = 10;
 
-
     public float speed = 100f;
 
     public float regen = 1f;
@@ -40,19 +39,21 @@ public class ShipData : MonoBehaviour
 
     public GameManager gameManager;
 
-
     [Range(0f,1f)]
     public float shiftRate = 0.1f;
     public int speedLevel, regenLevel, cannonLevel, damageLevel, fireRateLevel;
 
     private TextMeshProUGUI tmp;
+    public TextMeshProUGUI killsText;
+    public TextMeshProUGUI playersAliveText;
     private Slider progbar;
 
     public int kills;
+    public static int playersAlive = 20;
 
     void Start()
     {
-
+        playersAlive = 20;
         speedLevel = 0;
         regenLevel = 0;
         cannonLevel = 0;
@@ -116,6 +117,13 @@ public class ShipData : MonoBehaviour
             health += regen;
             regenTimer = timeToRegen;
         }
+
+        if (GetComponent<ShipCombat>().player)
+        {
+            killsText.text = "" + kills;
+            playersAliveText.text = "" + playersAlive;
+        }
+
     }
 
     public void Damage(float dmg)
@@ -125,8 +133,7 @@ public class ShipData : MonoBehaviour
         {
             //player dead
             Dead();
-
-            regenTimer = timeToRegen;
+            playersAlive--;
         }
 
         
