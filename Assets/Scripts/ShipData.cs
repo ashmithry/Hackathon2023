@@ -53,7 +53,7 @@ public class ShipData : MonoBehaviour
     private Slider progbar;
 
     public int kills;
-    public static int playersAlive = 32;
+    public static int playersAlive = 31;
 
     public static string playerUsername;
 
@@ -61,7 +61,7 @@ public class ShipData : MonoBehaviour
 
     void Start()
     {
-        playersAlive = 32;
+        playersAlive = 31;
         speedLevel = 0;
         regenLevel = 0;
         cannonLevel = 0;

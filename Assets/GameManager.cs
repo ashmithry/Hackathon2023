@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         GameObject player = GameObject.Find("Player");
-        if (player != null && ShipData.playersAlive == 1)
+        if (player != null && ShipData.playersAlive == 0)
         {
             Debug.Log("Game Won!");
             GameObject.Find("AudioManager").GetComponent<AudioManager>().Play("plunderRoyale");
