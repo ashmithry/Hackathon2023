@@ -6,15 +6,12 @@ using TMPro;
 public class GameStart : MonoBehaviour
 {
     
-    public GameObject[] AI;
-    public Transform PlayerSpawnPoint;
+    public GameObject AI;
     public GameObject Player;
-
-    public ShipData[] data = new ShipData[32];
-    
 
     void Awake()
     {
+        GameObject.Find("GameManager").GetComponent<GameManager>().playerCount = 32;
         //Spawn AI around the map
         List<string> names = new List<string>(usernames);
 
@@ -26,40 +23,39 @@ public class GameStart : MonoBehaviour
             playerSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
         } while (playerSpawnPoint == transform);
 
+        //Spawn the player
         int index = 0;
         GameObject p = GameObject.Find("Player");
         p.transform.position = playerSpawnPoint.position;
         GameObject minimapCam = GameObject.Find("MinimapCam");
-        data[index] = p.GetComponent<ShipData>();
         minimapCam.transform.parent = p.transform;
-        minimapCam.transform.localPosition = new Vector3(0,85,0);
+        minimapCam.transform.localPosition = new Vector3(0, 85, 0);
+        minimapCam.transform.Rotate(0, 0, 135);
+        RotateTowardsCenter(p);
 
-        Vector3 playerLookPos = Vector3.zero - p.transform.position;
-        playerLookPos.y = 0;
-        p.transform.rotation = Quaternion.LookRotation(playerLookPos);
-
-        index = 1;
         foreach (Transform sp in spawnPoints)
         {
-            if(sp == transform || Mathf.Abs(sp.position.magnitude) < 10f || sp.position == playerSpawnPoint.position)
+            if(sp == transform || Mathf.Abs(sp.position.magnitude) < 10f || sp == playerSpawnPoint)
             {
                 continue;
             }
 
-            GameObject cur = AI[(int)Random.Range(0, AI.Length)];
-            GameObject o = Instantiate(cur, sp.position, cur.transform.rotation);
+            GameObject o = Instantiate(AI, sp.position, Quaternion.identity);
+            o.transform.Translate(0, -0.5f, 0);
 
+            // Assign a random name
 
             int i = Random.Range(0, names.Count);
             o.GetComponent<ShipData>().username.GetChild(0).GetComponent<TextMeshPro>().text = names[i];
             names.Remove(names[i]);
-
-
-            Vector3 lookPos = Vector3.zero - o.transform.position;
-            lookPos.y = 0;
-            o.transform.rotation = Quaternion.LookRotation(lookPos);
-            index++;
         }
+    }
+
+    void RotateTowardsCenter(GameObject o)
+    {
+        Vector3 lookPos = Vector3.zero - o.transform.position;
+        lookPos.y = 0;
+        o.transform.rotation = Quaternion.LookRotation(lookPos);
     }
 
     string[] usernames = {

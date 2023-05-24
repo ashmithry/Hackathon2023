@@ -49,11 +49,9 @@ public class ShipData : MonoBehaviour
 
     private TextMeshProUGUI upgradePTSText;
     public TextMeshProUGUI killsText;
-    public TextMeshProUGUI playersAliveText;
     private Slider progbar;
 
     public int kills;
-    public static int playersAlive = 31;
 
     public static string playerUsername;
 
@@ -61,7 +59,6 @@ public class ShipData : MonoBehaviour
 
     void Start()
     {
-        playersAlive = 31;
         speedLevel = 0;
         regenLevel = 0;
         cannonLevel = 0;
@@ -98,9 +95,12 @@ public class ShipData : MonoBehaviour
         if(combat.player && isInStorm)
         {
             stormVolume.SetActive(true);
-        }else if(combat.player){
+        }
+        else if(combat.player)
+        {
             stormVolume.SetActive(false);
         }
+
         healthBarBG.LookAt(Camera.main.transform);
         username.LookAt(Camera.main.transform);
 
@@ -111,13 +111,10 @@ public class ShipData : MonoBehaviour
             coins = 0;
         }
 
-        if(isInStorm)
+        if(isInStorm && stormTimer <= 0)
         {
-            if(stormTimer <= 0)
-            {
-                Damage(StormSystem.stormDamage);
-                stormTimer = StormSystem.damageTickSpeed;
-            }
+            Damage(StormSystem.stormDamage);
+            stormTimer = StormSystem.damageTickSpeed;
         }
 
         stormTimer -= Time.deltaTime;
@@ -139,7 +136,6 @@ public class ShipData : MonoBehaviour
         if (GetComponent<ShipCombat>().player)
         {
             killsText.text = "" + kills;
-            playersAliveText.text = "" + playersAlive;
         }
     }
 
@@ -149,8 +145,8 @@ public class ShipData : MonoBehaviour
         if(health <= 0)
         {
             //player dead
+            GameObject.Find("GameManager").GetComponent<GameManager>().OnKilled(gameObject);
             Dead();
-            playersAlive--;
         }
     }
 
@@ -158,8 +154,10 @@ public class ShipData : MonoBehaviour
     {
         if(combat.player)
             gameManager.GameOver();
+
         Instantiate(explodeEffect, transform.position, Quaternion.identity);
-        gameObject.SetActive(false);
+        Destroy(gameObject);
+        
     }
 
     public Color col;
