@@ -41,7 +41,6 @@ public class GameStart : MonoBehaviour
             }
 
             GameObject o = Instantiate(AI, sp.position, Quaternion.identity);
-            o.transform.Translate(0, -0.5f, 0);
 
             // Assign a random name
 

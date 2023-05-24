@@ -56,7 +56,7 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
   - name: plunderRoyale
-    clip: {fileID: 8300000, guid: e6988db557c79084c8468aca45f0e250, type: 3}
+    clip: {fileID: 8300000, guid: 8914203039432ea47a5625cbc69154bf, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
@@ -66,7 +66,7 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
   - name: movementSound
-    clip: {fileID: 8300000, guid: 196b5bfac34146b48ad0d6cdf8816990, type: 3}
+    clip: {fileID: 8300000, guid: cad7b0f27d3a5fd48af8768606336ef3, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
