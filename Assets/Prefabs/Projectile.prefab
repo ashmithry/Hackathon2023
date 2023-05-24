@@ -112,5 +112,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   duration: 1
-  damage: 7
+  damage: 3.5
   shooter: {fileID: 0}

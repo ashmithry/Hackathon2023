@@ -189,7 +189,7 @@ public class ShipData : MonoBehaviour
 
                     if (damageLevel >= 3) return;
 
-                    damage += 1.5f;
+                    damage += 4f;
                     damageLevel++;
                     UpdateUI(GameObject.Find("DamageUpgrade"), damageLevel - 1);
                     break;
