@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject pauseMenu;
 
     public void GameOver()
-    {
+    {  
         UI.SetActive(false);
         GameOverUI.SetActive(true);
     }
